@@ -1,0 +1,101 @@
+# Chapter 05. 헷갈리는 개념
+
+### Inline
+
+~~~sql
+SELECT A.*
+	FROM
+	(
+  SELECT
+  		NAME
+  		,CREDIT_LIMIT
+  		FROM CUSTOMERS
+  )A
+;
+~~~
+
+### SUB QUERY
+
+~~~SQL
+SELECT
+		PRODUCT_ID
+		,PRODUCT_NAME
+		,LIST_PRICE
+	FROM PRODUCTS
+	WHERE  LIST_PRICE =(
+  			SELECT 
+  					MAX(K.LIST_PRICE)
+  					FROM PRODUCTS K)
+  					;
+  					
+#SCALAR SUB QUERY
+
+SELECT
+	A.PRODUCT_NAME,
+	A.LIST_PRICE,
+	ROUND((SELECT AVG(K.LIST_PRICE)
+        	FROM PRODUCTS K
+        	WHERE K.CATEGORY_ID = A.CATEGORY_ID),2)
+        	AVG_LIST_PRICE
+FROM PRODUCTS A
+ORDER BY A.PRODUCT_NAME;
+
+
+#INLINE SUB QUERY
+
+SELECT 
+	ORDER_ID,
+	ORDER_VALUE
+	FROM
+	( SELECT ORDER_ID,
+  				SUM(QUANTITY * UNIT_PRICE) ORDER_VALUE
+  				FROM ORDER_ITEMS
+  				GROUP BY ORDER_ID
+  				ORDER BY ORDER_VALUE DESC)
+WHERE ROWNUM <=10;
+~~~
+
+
+
+
+
+
+
+# Chapter 05. SQL 기본 연습문제
+
+
+
+1. PRODUCTS table에서 LIST_PRICE 의 가격이 평균 가격보다 큰 행의 PRODUCT_ID, PRODUCT_NAME, LIST_PRICE 컬럼을 구하는 SELECT 문을 작성하고, PRODUCT_NAME 으로 정렬하라.
+
+~~~sql
+SELECT A.PRODUCT_ID
+	,A.PRODUCT_NAME
+	,A.LIST_PRICE
+	FROM PRODUCTS A
+WHERE A.LIST_PRICE >(
+	SELECT AVG(K.LIST_PRICE)
+	FROM PRODUCTS K)
+ORDER BY PRODUCT_NAME;
+~~~
+
+
+
+2. CUSTOMERS 테이블에서 CREDIT_LIMIT의 값이 가장 큰 10건의 행을 출력하라. (단, CUSTOMERS 테이블의 모든 칼럼을 출력하고 CREDIT_LIMIT 이 동일하다면 NAME을 칼럼을 기준으로 오름차순 정렬로 출력하라)
+
+- 가장 큰 10건의 행
+- 모든 칼럼 출력
+- CREDIT_LIMIT 동일하다면 NAME 기준으로 오름차순(ASC)
+
+
+
+~~~sql
+SELECT *
+FROM(
+  	SELECT *
+  		FROM CUSTOMERS C
+ORDER BY CREDIT_LIMIT, NAME ASC)
+WHERE ROWNUM <=10;
+~~~
+
+
+
