@@ -1,10 +1,8 @@
 JavaStudyIntermediate3
 
-
-
 ## Date& Calendar
 
-- 날짜와 시간을 구하기 위한 클래스 Date 클래스
+- 날짜와 시간을 구하기 위한 클래스 -> `Date 클래스`
 - 최초의 클래스, 지역화 고려 아님. (시차 고려 안해준다는 것.)
 - Deprecated : 더 이상 지원하지 않는 기능이므로 사용을 자제하라는 의미
 
@@ -12,8 +10,8 @@ JavaStudyIntermediate3
 
 - **java.util.SimpleDateFormat 클래스를 이용해서 원하는 형태로 출력하는 방법**
   - yyyy는 년, MM은 월, dd는 일을 표현한다.
-  - hh는 시간, mm은 분, ss는 초를 표현하며 a는 오전/오후 를 표현한다.
-  - zzz는 TimeZone을 나타낸다. 한국의 경우 한국표준시 KST가 TimeZone에 해당하는 값입니다.
+  - hh는 시간, mm은 분, ss는 초를 표현하며 `a는 오전/오후` 를 표현한다.
+  - zzz는 TimeZone을 나타낸다. 한국의 경우 한국표준시 KST가 TimeZone에 해당하는 값.
 
 ```java
 import java.text.SimpleDateFormat;
@@ -27,8 +25,10 @@ public class DateExam {
 		System.out.println(date.toString());
 		
 		SimpleDateFormat ft = new SimpleDateFormat("yyyy.MM.dd 'at' hh:mm:ss a zzz");
+    
+    //date만 뽑기
 		System.out.print(ft.format(date));
-		
+    //date 중 시간만 뽑기 
 		System.out.println(date.getTime());
     
 		//현재 시간을 Long값으로 구하는 방법
@@ -47,9 +47,9 @@ public class DateExam {
 
 ## Calendar
 
-Calendar 클래스 생생 방법 : **지역성 보완**
+Calendar 클래스 생성 방법 : **지역성 보완**
 
-- Calendar클래스는 추상클래스 -> **new 이용해 객체 생성 불가능** 
+- Calendar클래스는 `추상클래스` ->**`new 이용해 객체 생성 불가능`** 
 - Calendar클래스에 대한 인스턴스를 생성하려면 Calendar가 가지고 있는 클래스 메소드 **getInstnace()**를 사용해야 한다.
 - **getInstance()메소드를 호출하면 내부적으로 java.util.GregorianCalendar 인스턴스를 만들어서리턴한다.**
 - GregorianCalendar는 Calendar의 자식 클래스이다. 그런데 이걸로 굳이 바로 인스턴스 만들지 않는 이유는, 표준 달력이 달라질 수도 있기 때문에.
@@ -70,8 +70,11 @@ public class CalendarExam {
 		Calendar cal = Calendar.getInstance();
 		
 		System.out.println(cal.get(Calendar.YEAR));
+    
 		System.out.println(cal.get(Calendar.MONTH)+1);
+    //Month 중요! + 1 무조건 해주어야 함.
 		//자바가 0월부터 11월까지 표현. 
+    
 		System.out.println(cal.get(Calendar.DATE));
 		System.out.println(cal.get(Calendar.HOUR));
 		System.out.println(cal.get(Calendar.HOUR_OF_DAY));
@@ -83,6 +86,7 @@ public class CalendarExam {
     //cal.add(Calendar.HOUR, -5); //전으로
     
 		System.out.println(cal.get(Calendar.YEAR));
+    
 		System.out.println(cal.get(Calendar.MONTH)+1);
 		System.out.println(cal.get(Calendar.DATE));
 		System.out.println(cal.get(Calendar.HOUR));
@@ -116,8 +120,6 @@ public class CalendarExam{
 
 
 
-
-
 ## Time
 
 - Java에서 제공하는 Date, Time API는 부족한 기능 지원을 포함한 여러가지 문제점을 가지고 있었음
@@ -126,7 +128,7 @@ public class CalendarExam{
 
 
 
-1. now는 현재 시간을 구한다.
+1. **now는 현재 시간을 구한다.**
 2. LocalDate.of, LocalTime.of
 
 ```java
@@ -151,6 +153,7 @@ public class TimeExam {
 		//17시 18분에 대한 객체를 만들고 싶다.
 		LocalTime lt1 = LocalTime.of(17, 18);
 		System.out.println(lt1);
+    
 		//10시 15분 30초 
 		LocalTime lt2 =  LocalTime.parse("10:15:30");
 		System.out.println(lt2);

@@ -108,7 +108,7 @@ Generic 사용
 
 - 클래스 이름 뒤에 `<E>`가 제네릭을 적용한 것이다. Box는 가상의 클래스 E를 사용한다는 의미.
 
-- 으로 클래스 이름 뒤에 <E>가 제네릭을 적용한 것이다. Box는 가상의 클래스 E를 사용한다는 의미.
+- 으로 클래스 이름 뒤에 `<E>`가 제네릭을 적용한 것이다. Box는 가상의 클래스 E를 사용한다는 의미.
 - **Object를 받아들이고, 리턴하던 부분이 E로 변경. E는 실제로 존재하는 클래스는 아니다.**
 
 ~~~java
@@ -170,10 +170,11 @@ public class setExam {
 		// TODO Auto-generated method stub
 		//Set은 인터페이스이기 때문에 New 사용해서 객체 생성 불가 
 		Set<String> set1 = new HashSet<>();
+    
 		//set1.add("kang"); //저장할 때마다 불린 값. 이미 같은값 있으면 False.
 		boolean flag1 = set1.add("kang");
 		boolean flag2 = set1.add("kim");
-		boolean flag3 = set1.add("kang");
+		boolean flag3 = set1.add("kang"); //False
 		
 		//set의 크기
 		System.out.println(set1.size());
@@ -184,14 +185,13 @@ public class setExam {
 		System.out.println(flag3);
 		
 		//값 다 꺼낼때 필요한 iterator
-		
-		Iterator <String> iter = set1낼 것이 있다면 true 리턴.  
-			String str = iter.next(); //값을 꺼내서 받아냄.
+		//한꺼번에 
+		Iterator <String> iter = set1 //꺼
+      낼 것이 있다면 true 리턴.  
+			String str = iter.next(); //값을 하나 꺼내서 받아냄.
 			System.out.println(str);
-		}
-		
+		}		
 	}
-
 }
 ~~~
 
@@ -206,6 +206,7 @@ public class setExam {
 - 저장공간이 필요에 따라 자유 + 자료구조
 - 예전에 배웠던 배열은 자료구조이면서, 한 번 생성하면 크기 변경 불가 
 - index 사용가능
+- 중복 존재
 
 
 
@@ -226,6 +227,7 @@ public class ListExam {
 		//사이즈 출력 
 		//리스트의 부모 인터페이스인 collections가 가지고 있는 메소드
 		
+    //순서 있으니까 while 대신 for
 		for (int i = 0 ; i <list.size(); i++) {
 			String str = list.get(i);
 			System.out.println(str);			
@@ -291,13 +293,14 @@ import javax.swing.JComboBox.KeySelectionManager;
 public class MapExam {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+    // TODO Auto-generated method stub
 		Map <String, String>  map = new HashMap();
 		map.put("001", "kim");
 		map.put("002", "lee");
 		map.put("003", "choi");
 		
-		//같은 key로 두 번 담으면 어차피 사이즈는 똑같음. 
+		//같은 key로 두 번 담으면 (인덱스 느낌이니까 갱신되어버림) 어차피 사이즈는 똑같음. 
 		map.put("001", "kang");
 		//데이터는 마지막 것.
 		
@@ -311,8 +314,8 @@ public class MapExam {
 			String key = iter.next();
 			String value = map.get(key);
 			System.out.println(key +  ":"+ value);
-		}
-		
-	}
+    }		
+}
+
 ```
 
